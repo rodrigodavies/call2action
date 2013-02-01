@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Drag and Drop Editor</title>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<script src="jquery.ui.touch-punch.min.js"></script>
+	<script src="jquery.jsPlumb-1.3.16-all-min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+	<div id="boxContainer" class="boxContainer content"><a href="#" class="toggleBoxes">Boxes:</a>
+		<div id="toggle" style="display:none;">
+		<div id="boxA" class="box new" box="A">
+			<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
+			<img id="uA" src="img/u.jpg">
+			<img id="dA" src="img/divider.jpg">
+		</div>
+		<div id="boxB" class="box new" box="B">
+			<div class="text">PLAY AN AUDIO FILE</div>
+			<img id="uB" src="img/u.jpg">
+		</div>
+
+		<div id="boxC" class="box new" box="C">
+			<div class="text">ACTION</div>
+			<img id="uC" src="img/list.jpg">
+		</div>
+		<div id="boxD" class="box new" box="D">
+		<div class="text">PLAY AN AUDIO FILE<br><br><br>LISTEN FOR USER INPUT</div>
+			<img id="uD" src="img/u.jpg">
+			<img id="dD" src="img/divider.jpg"></div>
+	</div></div>
+	<div id="holder"></div>
+	<div id="delete" class="content">Delete</div>
+	<div class="explanation content">
+				<a href="#" id="detach" class="detach">Remove All Connections</a>|
+				<a href="#" id="clearCanvas" class="clear">Clear Canvas</a>|
+				<a href="#" id="saveCanvas" class="save">Save Canvas</a></div>
+	<pre id="dialog" style="display:none;" title="Canvas" ></pre>
+	<script type="text/javascript" src="jsplumb-stuff.js"></script>
+</body>
+</html>
