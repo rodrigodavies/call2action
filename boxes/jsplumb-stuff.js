@@ -4,30 +4,41 @@ TODO:
 -merging with drupal
 -update XML stuffs - does not work atm
 -upload files where??
--add dbl click handler for block A - change endpoints?
--prompt user for number of options in block a?
+
+
 -resizability
+-add different color endpoint for user input (done)
+-add overlays for user input endpoint 
+	--use image? or somehow add text.....
+-horizontal scrolling (done)
+-blocks - working on fucntionality
+	--manage endpoints: connect inner boxes?
+	--inner divs not draggable? or is that fine
+	--if divs are dragged onto the block, they arent added to it.
+		change that? ie droppable?
 **/
 
 (function() {
 	var counter=0;
 	var connectorStrokeColor="rgba(198,89,30,0.7)";
 	var hoverPaintStyle = { strokeStyle:"#7ec3d9" };
-	// var endpoint = {
- //       paintStyle:{ fillStyle:'#6c8dc4' },
- //       isSource:true,
- //       connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:8 },
- //       maxConnections:1000,
- //       isTarget:true,
- //       dropOptions : { tolerance:"touch",hoverClass:"dropHover" }
- //     };
+	var inputs_block = 3;
 
 	var sourceEndpoint = {
 		endpoint:"Dot",
 		paintStyle:{ fillStyle:"#225588",radius:10 },
 		isSource:true,
+
 		maxConnections:1
 	};
+
+	var userInputEndpoint = {
+		endpoint:"Dot",
+		paintStyle:{ fillStyle:"#CCFF00",radius:10 },
+		isSource:true,
+
+		maxConnections:1
+	}
 
 	var targetEndpoint = {
 		endpoint:"Dot",					
@@ -36,6 +47,7 @@ TODO:
 		dropOptions:{ hoverClass:"hover", activeClass:"active" },
 		isTarget:true
 	};
+
             
      
 	window.jsPlumbDemo = {
@@ -78,8 +90,18 @@ TODO:
 		    })
 
 		    $('.toggleBoxes').click(function() {
-		    	$('#toggle').toggle();
+		    	//close blocks
+		    	$('#toggle-block').hide('fast');
+		    	$('#toggle-box').toggle('fast');
+
 		    })
+
+		    $('.toggleBlocks').click(function() {
+		    	//close boxes
+		    	$('#toggle-box').hide('fast');
+		    	$('#toggle-block').toggle('fast');
+		    })
+
 		    //create xml file
 		    $('.save').click(function(){
 		    	var elements = $('.added');
@@ -109,15 +131,18 @@ TODO:
 		    	helper:"clone",
 		    	revert:"invalid",	
 		    });
+
+		    
+		    
 		    
 
 			//make canvas droppable, add endpoints
 			 $( "#holder" ).droppable({
-			 	accept: ".box",
+			 	accept: ".box, .block",
 		    	drop: function (event, ui){
-		    		var object = ui.draggable.attr('box');
+		    		var object = ui.draggable.attr('obj');
 		    		var parentID = ui.draggable.parent().attr('id');
-		    		if(parentID=='toggle'){
+		    		if(parentID=='toggle-box' || parentID=='toggle-block'){
 		    			//add clone of element to canvas
 		    			var _id = 'el'+counter;
 		    			counter++;
@@ -127,14 +152,16 @@ TODO:
 							.attr('id', _id)
 							.css('position', 'absolute')
 							.css('margin', '0px')
-							.css('padding', '0px')
-							// .dblclick(function (){
-							// 	var newText = prompt("Enter text to display in element:");
-							// 	if(newText != null){$(this).text(newText);}
-							// 	});
+
 			 			$(this).append(newElement);
-			 			
-			 			jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, targetEndpoint);
+			 			if(parentID=='toggle-block'){
+							$(newElement).children().each(function () {
+								var parent = $(this).parent().attr('id');
+								var id = $(this).attr('id');
+								id = parent + id;
+								$(this).attr('id', id);
+							});
+						}	
 			 			addConnectorsbyObject(_id, object);
 			 			jsPlumb.draggable(_id, {containment:'parent'});
 			 			updateBlock(_id, object);
@@ -157,17 +184,29 @@ TODO:
 
 			//add endpoints at specific points for A, one for each other block
 			function addConnectorsbyObject (_id, object){
+				jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, targetEndpoint);
 				switch(object){
 					case "A": //variable number of exit nodes
-						//do stuff here
-						var num = parseInt(prompt("Specify the number of exit nodes")); //might be a limiting factor?
-						while (num>=10 || isNaN(num)){num = parseInt(prompt("Invalid Input"));}
-						for (var i=1; i<num+1; i++){
-							var location = i/(num+1);
-							jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, sourceEndpoint);
-						};
-
-						
+						if(!$('#'+_id).hasClass('nested')){
+							var num = parseInt(prompt("Specify the number of exit nodes")); //might be a limiting factor?
+							while (num>=10 || isNaN(num)){num = parseInt(prompt("Invalid Input"));}
+							for (var i=1; i<num+1; i++){
+								var location = i/(num+1);
+								jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, userInputEndpoint);
+							};
+						}
+						else if ($('#'+_id).parent().attr('obj')=='stories'){
+							for(var i=1; i<inputs_block+1; i++){ //add three
+								var location = i/(inputs_block+1);
+								jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, userInputEndpoint);
+							}; 
+						}
+						else if ($('#'+_id).parent().attr('obj')=='record'){
+							for(var i=1; i<inputs_block+1; i++){ //add three
+									var location = i/(inputs_block+1);
+									jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, userInputEndpoint);
+								};
+								} 					
 						break;
 					default: //add one exit node
 						jsPlumb.addEndpoint(_id, {anchor: "BottomCenter"}, sourceEndpoint);
@@ -177,30 +216,52 @@ TODO:
 		};
 
 		function updateBlock(_id, object) {
-			var textElement = $('#'+_id+' > div');
-			textElement.css('padding-top', '15px').css('font-size', '14px');
-			switch(object){
-				case "A": //update top text to include file input
-					textElement.html('Select an audio file:<input type="file" accept="audio/*"><br><br>ACCEPT USER INPUT')
-					break;
-				case "B": //update text to include file input
-					textElement.html('Select an audio file:<input type="file" accept="audio/*">')
-					break;
-				case "C": //add list to choose type of action 
-				//Play current audio file (from an array), Publish story, Delete story, Skip forward or backward in the database
-					$('#'+_id+' > img').remove(); //remove image
-					textElement.html('Select an action:&nbsp;<select name="action">'
-						+'<option value="default">Select</option>'
-						+'<option value="play">Play audio file</option>'
-					+'<option value="publish">Publish story</option>'
-					+'<option value="delete">Delete story</option>'
-					+'<option value="skipForward">Skip Forward</option>'
-					+'<option value="skipBackward">Skip Backward</option></select>');
+			if(object != "record" && object !="stories"){
+				// var textElement = $('#'+_id+' > div');
+				// textElement.css('padding-top', '15px').css('font-size', '14px');
+				switch(object){
+					case "A": //update top text to include file input
+						var textElement = $('#'+_id+' > div');
+						textElement.css('padding-top', '15px').css('font-size', '14px');
+						textElement.html('Select an audio file:<input type="file" accept="audio/*"><br><br>ACCEPT USER INPUT')
+						break;
+					case "B": //update text to include file input
+						var textElement = $('#'+_id+' > div');
+						textElement.css('padding-top', '15px').css('font-size', '14px');
+						textElement.html('Select an audio file:<input type="file" accept="audio/*">')
+						break;
+					case "C": //add list to choose type of action 
+					//Play current audio file (from an array), Publish story, Delete story, Skip forward or backward in the database
+						var textElement = $('#'+_id+' > div');
+						textElement.css('padding-top', '15px').css('font-size', '14px');
+						$('#'+_id+' > img').remove(); //remove image
+						textElement.html('Select an action:&nbsp;<select name="action">'
+							+'<option value="default">Select</option>'
+							+'<option value="play">Play audio file</option>'
+						+'<option value="publish">Publish story</option>'
+						+'<option value="delete">Delete story</option>'
+						+'<option value="skipForward">Skip Forward</option>'
+						+'<option value="skipBackward">Skip Backward</option></select>');
 
-					break;
-				case "D": //update top text to include file input
-					textElement.html('Select an audio file:<input type="file" accept="audio/*"><br><br>LISTEN FOR USER INPUT')
-					break;
+						break;
+					case "D": //update top text to include file input
+						var textElement = $('#'+_id+' > div');
+						textElement.css('padding-top', '15px').css('font-size', '14px');
+						textElement.html('Select an audio file:<input type="file" accept="audio/*"><br><br>LISTEN FOR USER INPUT')
+						break;
+				}
+			}else{
+				//iterate through items in div
+				$('#'+_id).children().each(function () {
+					var id = $(this).attr('id'); var obj = $(this).attr('obj');
+					updateBlock(id, obj);
+					addConnectorsbyObject(id, obj);
+				});
+
+				//connect inner divs?
+					
+			
+								
 			}
 		}
 

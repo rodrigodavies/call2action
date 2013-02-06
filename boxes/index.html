@@ -11,27 +11,73 @@
 	<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-	<div id="boxContainer" class="boxContainer content"><a href="#" class="toggleBoxes">Boxes:</a>
-		<div id="toggle" style="display:none;">
-		<div id="boxA" class="box new" box="A">
+	<div id="boxContainer" class="boxContainer content">
+		<a href="#" class="toggleBoxes">Boxes</a>|
+		<a href="#" class="toggleBlocks">Blocks</a>
+		<div id="toggle-box" class="container" style="display:none;">
+		<div id="boxA" class="box new" obj="A">
 			<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
 			<img id="uA" src="img/u.jpg">
 			<img id="dA" src="img/divider.jpg">
 		</div>
-		<div id="boxB" class="box new" box="B">
+		<div id="boxB" class="box new slim" obj="B">
 			<div class="text">PLAY AN AUDIO FILE</div>
 			<img id="uB" src="img/u.jpg">
 		</div>
 
-		<div id="boxC" class="box new" box="C">
+		<div id="boxC" class="box new slim" obj="C">
 			<div class="text">ACTION</div>
 			<img id="uC" src="img/list.jpg">
 		</div>
-		<div id="boxD" class="box new" box="D">
+		<div id="boxD" class="box new" obj="D">
 		<div class="text">PLAY AN AUDIO FILE<br><br><br>LISTEN FOR USER INPUT</div>
 			<img id="uD" src="img/u.jpg">
 			<img id="dD" src="img/divider.jpg"></div>
-	</div></div>
+	</div>
+	<div id="toggle-block" class="container" style="display:none;">
+		<div id="storiesBlock" class="block new" obj="stories">
+			<div id="boxB" class="box nested slim" obj="B">
+				<div class="text">PLAY AN AUDIO FILE</div>
+				<img id="uB" src="img/u.jpg">
+			</div>
+
+			<div id="boxC" class="box nested slim" obj="C">
+				<div class="text">ACTION</div>
+				<img id="uC" src="img/list.jpg">
+			</div>
+			<div id="boxA" class="box nested" obj="A">
+				<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
+				<img id="uA" src="img/u.jpg">
+				<img id="dA" src="img/divider.jpg">
+			</div>
+
+			<div id="boxFwd" class="box nested small" obj="fwd">
+				<div class="text center">FWD</div></div>
+			<div id="boxRwd" class="box nested small" obj="rwd"><div class="text center">RWD</div></div>
+
+			</div>
+		<div id="recordBlock" class="block new" obj="record">
+			<div id="boxD" class="box nested" obj="D">
+				<div class="text">PLAY AN AUDIO FILE<br><br><br>LISTEN FOR USER INPUT</div>
+				<img id="uD" src="img/u.jpg">
+				<img id="dD" src="img/divider.jpg">
+			</div>
+			<div id="boxB" class="box nested slim" obj="B">
+				<div class="text">PLAY AN AUDIO FILE</div>
+				<img id="uB" src="img/u.jpg">
+			</div>
+			<div id="boxA" class="box nested" obj="A">
+				<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
+				<img id="uA" src="img/u.jpg">
+				<img id="dA" src="img/divider.jpg">
+			</div>
+
+
+		</div>
+
+	</div>
+</div>
+	
 	<div id="holder"></div>
 	<div id="delete" class="content">Delete</div>
 	<div class="explanation content">
