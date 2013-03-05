@@ -1,7 +1,13 @@
 body{
-	font-family: Helvetica;
-	background-color:white;
+    font-family: Helvetica;
+    background-color:white;
 }
+#center-info {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
 #holder {
     position:fixed;
     overflow: scroll;
@@ -12,28 +18,29 @@ body{
     z-index:-1;
  }
 
-.boxContainer {
-	position:fixed;
-	left:0em;
-	top:0em;
-	background-color:#fff;
-	padding:10px 1em 1em 1em;
-	opacity:0.8;
+#sidebar {
+    position:fixed;
+    left:0em;
+    top:0em;
+    background-color:#fff;
+    /*opacity:0.8;*/
     z-index:100;
-	filter:alpha(opacity=80);
-	box-shadow: 2px 2px 19px #aaa;
+    filter:alpha(opacity=80);
+    box-shadow: 2px 2px 19px #aaa;
    -o-box-shadow: 2px 2px 19px #aaa;
    -webkit-box-shadow: 2px 2px 19px #aaa;
    -moz-box-shadow: 2px 2px 19px #aaa;
 
 }
 
-.boxContainer a {
+#sidebar a {
     display: inline-block;
-    margin:7px;
+    padding-top:10px;
+    padding-bottom: 10px;
+    width:49%;
+    border:1px solid #c3cdcd;
+    text-align: center;        
 }
-
-
 
 
 .container {
@@ -157,8 +164,6 @@ body{
 
 
 
-
-
 #delete {
     border:2px solid #ddd;
     position:absolute;
@@ -178,7 +183,7 @@ body{
 }
 
 
-a {text-decoration:none;
+.explanation a {text-decoration:none;
 display:inline-block;
 color:#01a3c6;
 font-weight:bold;
@@ -187,7 +192,7 @@ padding:0.3em;
 border-radius:0.2em;
 
 }
-a:hover {
+.explanation a:hover {
 color:#1b911b;
 background-color:#f0f0f0;
 }

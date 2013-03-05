@@ -1,90 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Drag and Drop Editor</title>
-	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-	<script src="jquery.ui.touch-punch.min.js"></script>
-	<script src="jquery.jsPlumb-1.3.16-all-min.js"></script>
+	<title>Call to Action</title>
+	<link rel="stylesheet" href="css/dd.css" />
+	<link rel="stylesheet" href="v2-styles.css" />
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-	<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-	<div id="boxContainer" class="boxContainer content">
-		<a href="#" class="toggleBoxes">Boxes</a>|
-		<a href="#" class="toggleBlocks">Blocks</a>
-		<div id="toggle-box" class="container" style="display:none;">
-		<div id="boxA" class="box new" obj="A">
-			<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
-			<img id="uA" src="img/u.jpg">
-			<img id="dA" src="img/divider.jpg">
-		</div>
-		<div id="boxB" class="box new slim" obj="B">
-			<div class="text">PLAY AN AUDIO FILE</div>
-			<img id="uB" src="img/u.jpg">
-		</div>
 
-		<div id="boxC" class="box new slim" obj="C">
-			<div class="text">ACTION</div>
-			<img id="uC" src="img/list.jpg">
+	<div id="sidebar">
+		<div id="logo"></div>
+		<div>
+			<a id="toggleBoxes" href="#" class="toggle Boxes">Boxes</a><a id="toggleBlocks" href="#" class="toggle Blocks">Blocks</a>
 		</div>
-		<div id="boxD" class="box new" obj="D">
-		<div class="text">PLAY AN AUDIO FILE<br><br><br>LISTEN FOR USER INPUT</div>
-			<img id="uD" src="img/u.jpg">
-			<img id="dD" src="img/divider.jpg"></div>
+		<div id="container">To begin, drag elements from the toolkit onto the canvas.
+			<div id="boxes">
+				<div class="box boxA">
+					<div class="top"></div>
+					<div class="bottom"></div>
+				</div>
+			</div>
+			<div id="blocks"></div>
+		</div>
 	</div>
-	<div id="toggle-block" class="container" style="display:none;">
-		<div id="storiesBlock" class="block new" obj="stories">
-			<div id="boxB" class="box nested slim" obj="B">
-				<div class="text">PLAY AN AUDIO FILE</div>
-				<img id="uB" src="img/u.jpg">
-			</div>
-
-			<div id="boxC" class="box nested slim" obj="C">
-				<div class="text">ACTION</div>
-				<img id="uC" src="img/list.jpg">
-			</div>
-			<div id="boxA" class="box nested" obj="A">
-				<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
-				<img id="uA" src="img/u.jpg">
-				<img id="dA" src="img/divider.jpg">
-			</div>
-
-			<div id="boxFwd" class="box nested small" obj="fwd">
-				<div class="text center">FWD</div></div>
-			<div id="boxRwd" class="box nested small" obj="rwd"><div class="text center">RWD</div></div>
-
-			</div>
-		<div id="recordBlock" class="block new" obj="record">
-			<div id="boxD" class="box nested" obj="D">
-				<div class="text">PLAY AN AUDIO FILE<br><br><br>LISTEN FOR USER INPUT</div>
-				<img id="uD" src="img/u.jpg">
-				<img id="dD" src="img/divider.jpg">
-			</div>
-			<div id="boxB" class="box nested slim" obj="B">
-				<div class="text">PLAY AN AUDIO FILE</div>
-				<img id="uB" src="img/u.jpg">
-			</div>
-			<div id="boxA" class="box nested" obj="A">
-				<div class="text" name="test">PLAY AN AUDIO FILE<br><br><br>ACCEPT USER INPUT</div>
-				<img id="uA" src="img/u.jpg">
-				<img id="dA" src="img/divider.jpg">
-			</div>
-
-
-		</div>
-
+	<div id="canvas">
+		<div id="center-info">
+		<h3 id="title">Title Goes Here</h3>
+		<p id="subtitle">Subtitle / Additional Information</p>
+		<p id="time"></p>
 	</div>
-</div>
+	<div class="align-right">
+		<p>Save Canvas</p>
+		<p>Clear Canvas</p>
+	</div></div>
+	<div id="delete">delete</div>
+
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<script src="js/jquery.ui.touch-punch.min.js"></script>
 	
-	<div id="holder"></div>
-	<div id="delete" class="content">Delete</div>
-	<div class="explanation content">
-				<a href="#" id="detach" class="detach">Remove All Connections</a>|
-				<a href="#" id="clearCanvas" class="clear">Clear Canvas</a>|
-				<a href="#" id="saveCanvas" class="save">Save Canvas</a></div>
-	<pre id="dialog" style="display:none;" title="Canvas" ></pre>
+	<script src="js/jquery.jsPlumb-1.3.16-all-min.js"></script>
+	<script src="js/jquery.dd.min.js"></script>
 	<script type="text/javascript" src="jsplumb-stuff.js"></script>
+	<script language="javascript">
+		//enable images in dropdown
+		$(document).ready(function(e) {
+		try {
+		$("body select").msDropDown();
+		} catch(e) {
+		alert(e.message);
+		}
+		});
+	</script>
 </body>
 </html>
