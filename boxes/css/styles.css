@@ -92,11 +92,24 @@ a:hover{
 
     
 }
-#delete {
+#delete-container {
+    /*display: block;*/
     position:fixed;
-    bottom:10px;
-    right: 20px;
+    bottom:0px;
+    right: 0px;
+    border: 1px solid #b7b9bd;
+    height:75px;
+    width:75px;
+    line-height: 75px;
+    text-align: center;
 }
+#delete a{
+    display: block;
+    width:100%;
+    height: 100%;
+    z-index: -10;
+}
+
 .box, .block {
     display:block;
     cursor:pointer;
@@ -156,7 +169,7 @@ a:hover{
 .redirect .icon{
     margin-top: 7px;
 }
-.play, .redirect {
+.play, .welcome{
     height:58px;
 }
 
@@ -283,5 +296,5 @@ a:hover{
 }
 
 ._jsPlumb_overlay { z-index:51; }
-._jsPlumb_endpoint { z-index:50; cursor:move; }
-._jsPlumb_connector { z-index:-1; }
+._jsPlumb_endpoint { z-index:51; cursor:move; }
+._jsPlumb_connector { z-index:50; }

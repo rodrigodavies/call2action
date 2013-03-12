@@ -1,4 +1,19 @@
 (function() {
+    $('#toggleBoxes').click(function() {
+		//close blocks
+		$(this).addClass('open');
+		$('#toggleBlocks').removeClass('open');
+		$('#blocks').fadeOut();
+		$('#boxes').fadeIn('fast');
+		});
+	$('#toggleBlocks').click(function() {
+		//close boxes
+		$(this).addClass('open');
+		$('#toggleBoxes').removeClass('open');
+		$('#boxes').fadeOut('fast');
+		$('#blocks').fadeIn('fast');
+		});
+    $( document ).tooltip({tooltipClass:'tooltip'});
 	var counter=0;
 	var connectorStrokeColor="#918f8f";
 	//var hoverPaintStyle = { strokeStyle:"#7ec3d9" };
@@ -42,7 +57,7 @@
 			jsPlumb.importDefaults({
 				EndpointStyles : [{ fillStyle:'#0066ff' }, { fillStyle:'#e3f00b' }],
 				Endpoints : [ [ "Dot", {radius:5} ], [ "Rectangle", { width:1,height:1 } ]],
-				Connector : [ "Straight", {curviness:0}],
+				Connector : [ "Bezier", {curviness:30}],
 
 			});
 
@@ -88,6 +103,7 @@
 				// $('#dialog').text(file);
 				// $( '#dialog' ).dialog({modal:true, height: 'auto', minWidth: 400});
 		  //   });
+	
 
 			//make objects droppable
 		    $(".new" ).draggable({
@@ -127,8 +143,9 @@
 
 			 			//addConnectorsbyObject(_id, object);
 			 			jsPlumb.draggable(_id, {containment:'parent'});
-			 			jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, topEndpoint);
-			 			if (object!='play-accept'){
+			 			if(object !='welcome'){
+			 			jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, topEndpoint);}
+			 			if (object!='play-accept'&& object !='hangup'){
 							jsPlumb.addEndpoint(_id, {anchor:"BottomCenter"}, bottomEndpoint);
 						}
 						if(object=='play-accept'){
@@ -143,9 +160,10 @@
 		    });
 
 			 //make delete box droppable, delete objects and respective connections
-			$( "#delete" ).droppable({
+			$( "#delete-container" ).droppable({
 			 		accept:".added",
       				hoverClass: "ui-state-hover",
+      				tolerance: "touch",
 			 		drop: function (event, ui){
 			 			jsPlumb.removeAllEndpoints($(ui.draggable).attr('id'));
 			 			$(ui.draggable).remove();

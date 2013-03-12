@@ -37,10 +37,14 @@
 					</div>
 					<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Listen for User Input</label></div>
 				</div>
+				<div class="box welcome new" type="welcome">
+					<img class="icon" src="img/play-icon.jpg" /><label>Welcome Audio File</label><input type="text" class="input url" placeholder="http://">
+				</div>
 				<div class="box redirect new" type="redirect">
 					<img class="icon" src="img/world.jpg" /><label>Redirect</label><input type="text" class="input tel" placeholder="###-###-####">
 				</div>
 				<div class="box hangup new" type="hangup"><img class="icon" src="img/hangup.jpg" /><label>Hang Up</label></div>
+
 			</div>
 			<div id="blocks" style="display:none">
 				<div class="block playaudio new" type="playaudio">
@@ -135,7 +139,7 @@
 	<div id="canvas">
 
 	</div><!--canvas-->
-	<div id="delete" class="content">delete</div>
+	<div id="delete-container" class="content"><a id="delete">delete</a></div>
 
 	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
@@ -145,23 +149,7 @@
 	<script src="js/javascript.js"></script>
 	<script src="js/jsplumb-stuff.js"></script>
 	<script language="javascript">
-    $('#toggleBoxes').click(function() {
-		//close blocks
-		$(this).addClass('open');
-		$('#toggleBlocks').removeClass('open');
-		$('#blocks').fadeOut();
-		$('#boxes').fadeIn('fast');
-		});
-	$('#toggleBlocks').click(function() {
-		//close boxes
-		$(this).addClass('open');
-		$('#toggleBoxes').removeClass('open');
-		$('#boxes').fadeOut('fast');
-		$('#blocks').fadeIn('fast');
-		});
-	$(function() {
-    $( document ).tooltip({tooltipClass:'tooltip'});
-  	});
+
 	</script>
 </body>
 </html>
