@@ -144,7 +144,7 @@ a:hover{
 }
 .recordaudio {
     background-color: #fcdf7b;
-    height:375px;
+    height:405px;
 }
 .play-accept, .play-listen {
     margin-top: 15px;
@@ -153,7 +153,7 @@ a:hover{
 
 }
 
- .top {
+.top {
     height: 60%;
     border-bottom:inherit;
 
@@ -293,6 +293,30 @@ a:hover{
 }
 .ui-tooltip {
     font-size: 10pt;
+}
+.action.inblock.play-action{
+    width:145px;
+}
+.action.inblock label {
+    line-height: 30px;
+    margin-left: 22px;
+
+}
+.action.inblock img {
+    margin-top: 5px;
+    margin-left: 0px;  
+
+}
+.actioncontainer {
+    margin-top: 9px;
+}
+.actioncontainer .action.inblock {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
+.publish {
+    margin-top: 5px;
 }
 
 ._jsPlumb_overlay { z-index:51; }
