@@ -57,7 +57,7 @@
 			jsPlumb.importDefaults({
 				EndpointStyles : [{ fillStyle:'#0066ff' }, { fillStyle:'#e3f00b' }],
 				Endpoints : [ [ "Dot", {radius:5} ], [ "Rectangle", { width:1,height:1 } ]],
-				Connector : [ "Bezier", {curviness:30}],
+				Connector : [ "Bezier", {curviness:50}],
 
 			});
 
@@ -77,9 +77,9 @@
 		    });
 
 		    $('.user-info').dblclick(function() {
-		    	var title = prompt("Enter a title.");
-		    	if(title){
-		    	$(this).html(title);
+		    	var info = prompt("Enter the "+$(this).attr('id'));
+		    	if(info){
+		    	$(this).html(info);
 		    }});
 
 		  //   //create xml file
