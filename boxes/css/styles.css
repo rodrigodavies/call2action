@@ -322,6 +322,7 @@ div.bottom {
 }
 #small {
     font-size: 14px;
+    color:gray;
 }
 #center-info {
     padding-top:15px;
@@ -398,7 +399,6 @@ input[type=text] {
     font-size: 12px;
     margin-left: 5px;
 }
-
 label, input, button, select, textarea {
     font-size: 13px;
     }
@@ -408,7 +408,15 @@ select {
 a.toggle{
     font-size:16px;
 }
-
+a#title{
+    font-size: 19px;
+}
+p#small{
+}
+a#subtitle, a#information {
+    color:gray;
+    font-weight: normal;
+}
 ._jsPlumb_overlay { z-index:51; }
 ._jsPlumb_endpoint { z-index:51; cursor:move; }
 ._jsPlumb_connector { z-index:50; }
