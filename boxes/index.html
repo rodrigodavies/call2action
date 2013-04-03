@@ -2,12 +2,10 @@
 <html>
 <head>
 	<title>Call to Action</title>
-	<!--link rel="stylesheet" href="css/dd.css" /-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 	<link rel="stylesheet" href="css/bootstrap.css" />
 	<link rel="stylesheet" href="css/bootstrap-select.min.css" />
-	<link rel="stylesheet" href="css/styles.css" />
-
+	<link rel="stylesheet" href="css/newstyles.css" />
 
 </head>
 <body>
@@ -18,109 +16,213 @@
 			<a id="toggleBoxes" class="toggle Boxes open">Boxes</a><a id="toggleBlocks" class="toggle Blocks">Blocks</a>
 		</div>
 		<div id="container">To begin, drag elements from the toolkit onto the canvas.
-			<div id="boxes">
-				<div class="box menu new" type="menu">
-					<div class="top">
-						<div class="header">
-						<label>Menu</label></div>
-						<input type="text" class="input name input-medium" placeholder="Name of Menu">
-						<div class="menu-instructions">
-							<img class="icon" src="img/play-icon.jpg" />
-							<label>Play Menu Prompt</label>
-							<input type="text" class="input url" placeholder="URL of .mp3 file or Text">
+			<table id="boxes" >
+				<tr>
+					<td class="cell">
+						<div class="box menu new" type="menu">
+							<div class="top menu-top">
+								<div class="header form-inline">
+									<label>Menu</label><input type="text" class="input name input-medium" placeholder="Name of Menu">
+								</div>
+								<div class="menu-instructions">
+									<img class="icon align-left" src="img/play-icon.jpg" />
+									<label class="align-left">Play Menu Prompt</label>
+									<input type="text" class="input menu align-left url" placeholder="URL of .mp3 file or Text">
+								</div>
+							</div>
+							<div class="bottom">
+								<img class="icon align-left" src="img/head-icon.jpg"/>
+								<label class="hover align-left">Accept User Input</label>
+							</div>
 						</div>
-					</div>
-					<div class="bottom">
-						<img class="icon" src="img/head-icon.jpg"/>
-						<label>Accept User Input</label>
-					</div>
-				</div>
-				<div class="box play new" type="play">
-					<div class="header"><label>Greeting</label></div>
-					<img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://">
-				</div>
-				<div class="box action new" type="action">
-					<div class="header"><label>Action</label></div>
-					<select class="select input-small">
-						<option value="" selected="selected">Action...</option>
-						<option value="play">Play</option>
-						<option value="publish">Publish</option>
-						<option value="forward">Forward</option>
-						<option value="back">Back</option>
-					</select>
-				</div>
-				<div class="box play-listen new" type="play-listen">
-					<div class="top"><img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label>
-						<input type="text" class="input url" placeholder="http://">
-					</div>
-					<div class="bottom"><img class="icon" src="img/headphone.jpg"/><label>Listen for User Input</label></div>
-				</div>
-<!-- 				<div class="box welcome new" type="welcome">
-					<img class="icon" src="img/play-icon.jpg" /><label>Welcome Audio File</label><input type="text" class="input url" placeholder="http://">
-				</div> -->
-				<div class="box redirect new form-inline" type="redirect">
-					<img class="icon" src="img/world.jpg" /><label>Redirect</label><input type="text" class="input tel" placeholder="###-###-####">
-				</div>
-				<div class="box hangup new" type="hangup"><img class="icon" src="img/hangup.jpg" /><label>Hang Up</label></div>
-
-			</div>
-			<div id="blocks" style="display:none">
-				<div class="block playaudio new" type="playaudio">
-					<label>Play Audio</label>
-					<div class="box play inblock">
-						<img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://">
-					</div>
-					<div class="box action inblock play-action">
-						<img class="icon" src="img/database.jpg"/><label>Play from database</label>
-					</div>
-					<div class="box play-accept inblock">
-						<div class="top"><img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://"></div>
-						<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Accept User Input</label></div>
-					</div>
-					<div class="actioncontainer">
-						<div class="box action inblock inline single-action">
-							<img class="icon" src="img/backward.jpg"/><label>Backward</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="cell">
+						<div class="box play new" type="play">
+							<div class="top">
+								<img class="icon" src="img/play-icon.jpg" /><label class="align-left">Play Audio File</label><input type="text" class="input url align-left" placeholder="http://">
+							</div>
+							<div class="bottom">
+								<select class="select input-medium drop align-center">
+									<option value="" >Choose what's next</option>
+									<option value="" title="User Input">User Input</option>
+									<option value="return" class="returnTo" title="Return to menu...">Return to menu...</option>
+									<option value="connect" class="connect" title="Manually connect">Manually connect</option>
+								</select>
+							</div>
 						</div>
-						<div class="box action inblock inline single-action">
-							<img class="icon" src="img/forward.jpg"/><label>Forward</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="cell">
+						<div class="box action new" type="action">
+							<div class="header"><label>Action</label></div>
+								<select class="select input-small align-center">
+									<option value="" selected="selected">Action...</option>
+									<option value="play">Play</option>
+									<option value="publish">Publish</option>
+									<option value="forward">Forward</option>
+									<option value="back">Back</option>
+								</select>
 						</div>
-					</div>										
-				</div>
-				<div class="block recordaudio new" type="recordaudio">
-					<label>Record Audio</label>
-					<div class="box play-listen inblock">
-						<div class="top"><img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label>
-							<input type="text" class="input url" placeholder="http://">
+					</td>
+				</tr>
+				<tr>
+					<td class="cell">
+						<div class="box record new" type="play-listen">
+							<div class="top">
+								<div class="header form-inline">
+									<label>Record</label><input type="text" class="input name input-medium" placeholder="Name of Record">
+								</div>
+								<img class="icon" src="img/play-icon.jpg" />
+								<label class="align-left">Play Audio File</label>
+								<input type="text" class="input url align-left" placeholder="http://">
+							</div>
+							<div class="bottom">
+								<img class="icon" src="img/headphone.jpg"/>
+								<label class="align-left">Listen for User Input</label>
+							</div>
 						</div>
-						<div class="bottom"><img class="icon" src="img/headphone.jpg"/><label>Listen for User Input</label></div>
-					</div>
-					<div class="box play inblock">
-						<img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://">
-					</div>
-					<div class="box play-accept inblock">
-						<div class="top"><img class="icon" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://"></div>
-						<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Accept User Input</label></div>
-					</div>
-					<div class="actioncontainer">
-						<div class="box action inblock inline single-action">
-							<img class="icon" src="img/backward.jpg"/><label>Backward</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="cell">
+						<div class="box redirect new form-inline" type="redirect">
+							<img class="icon" src="img/world.jpg" />
+							<label class="align-left">Redirect</label>
+							<input type="text" class="input tel" placeholder="###-###-####">
 						</div>
-						<div class="box action inblock inline single-action">
-							<img class="icon" src="img/forward.jpg"/><label>Forward</label>
+					</td>
+				</tr>
+				<tr>
+					<td class="cell">
+						<div class="box hangup new" type="hangup">
+							<img class="icon" src="img/hangup.jpg" /><label class="align-left">Hang Up</label>
 						</div>
-					</div>
-						<div class="box action inblock single-action publish">
-							<img class="icon" src="img/check.jpg"/><label>Publish</label>
-						</div>		
-					</div>
-				</div>
-			</div><!--blocks-->
+					</td>
+				</tr>
+			</table>
+			<table id="blocks" style="display:none">
+				<tr>
+					<td class="cell-block">
+ 						<div id="derp" class="block playaudio new" type="playaudio">
+							<label class="block-name">Play Audio</label>
+							<table>
+								<tr>
+									<td class="cell-inblock">
+										<div class="box play inblock">
+											<img class="icon align-moreleft" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input align-left url" placeholder="http://">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="cell-inblock">
+										<div class="box action inblock play-database">
+											<img class="icon" src="img/database.jpg"/><label>Play from database</label>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="cell-inblock">
+										<div class="box play-accept inblock">
+											<div class="top">
+												<img class="icon" src="img/play-icon.jpg" /><label class="align-left">Play Audio File</label>
+												<input type="text" class="input url align-left" placeholder="http://"></div>
+											<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Accept User Input</label></div>
+										</div>
+									</td>
+								</tr>
+								<tr class="finalrow">
+									<td>
+									<table width="100%">
+										<tr>
+											<td width="50%">
+												<div class="box action inblock inline single-action">
+												<img class="icon" src="img/backward.jpg"/><label>Backward</label>
+												</div>
+										</td>
+										<td>
+											<div class="box action inblock inline single-action">
+												<img class="icon" src="img/forward.jpg"/><label>Forward</label>
+											</div>
+										</td>
+										</tr>
+									</table>
+									</td>
+								</tr>
+						</table>											
+						</div> <!--end of div!-->
+					</td>
+				</tr>
+				<tr>
+					<td class="cell-block">
+						<div id="merp" class="block recordaudio new" type="recordaudio">
+							<label class="block-name">Record Audio</label>
+							<table>
+								<tr>
+									<td class="cell-inblock">
+										<div class="box play-listen inblock">
+											<div class="top"><img class="icon align-left" src="img/play-icon.jpg" /><label>Play Audio File</label>
+												<input type="text" class="input url" placeholder="http://">
+											</div>
+											<div class="bottom"><img class="icon align-left" src="img/headphone.jpg"/><label>Listen for User Input</label></div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="cell-inblock">
+										<div class="box play inblock">
+											<img class="icon align-left" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="cell-inblock">
+										<div class="box play-accept inblock">
+											<div class="top">
+												<img class="icon" src="img/play-icon.jpg" /><label class="align-left">Play Audio File</label>
+												<input type="text" class="input url align-left" placeholder="http://"></div>
+											<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Accept User Input</label></div>
+										</div>
+									</td>
+								</tr>
+								<tr class="finalrow">
+									<td>
+									<table width="100%">
+										<tr>
+											<td width="50%">
+												<div class="box action inblock inline single-action">
+												<img class="icon" src="img/backward.jpg"/><label>Backward</label>
+											</div>
+										</td>
+										<td>
+											<div class="box action inblock inline single-action">
+												<img class="icon" src="img/forward.jpg"/><label>Forward</label>
+											</div>
+										</td>
+										</tr>
+									</table>
+								</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="box action inblock single-action publish">
+											<img class="icon" src="img/check.jpg"/><label>Publish</label>
+										</div>	
+									</td>
+								</tr>
+						</table>											
+						</div><!--end of div!-->
+					</td>
+				</tr>
+			</table>
 		</div><!--container-->
 	</div><!--sidebar-->
 	<div id="info">
 		<div id="center-info">
 			<h3><a id="title" class="user-info" title="Double-click to edit">Title Goes Here</a></h3>
-			<p id="small" class="color-gray"><a id="subtitle" class="user-info">Subtitle </a>&nbsp;/&nbsp;<a id="information" class="user-info"> Additional Information</a></p>
+			<p class="color-gray"><a id="subtitle" class="user-info">Subtitle </a>&nbsp;/&nbsp;<a id="information" class="user-info"> Additional Information</a></p>
 			<p id="time"></p>
 		</div><!--center-info-->
 		<div class="align-right"><a id="save" class="color-red content">Save Canvas</a><br>
@@ -136,17 +238,11 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 	<script src="js/jquery.ui.touch-punch.min.js"></script>
 	<script src="js/jquery.jsPlumb-1.3.16-all-min.js"></script>
-	<script src="js/jquery.dd.min.js"></script>
 	<script src="js/javascript.js"></script>
 	<script src="js/jsplumb-stuff.js"></script>
 	<script src="js/canvas.js"></script>
-	<script srt="js/block.js"></script>
-	<script language="javascript">
-		$('input[type=text]').addClass("input-medium");
-		
-	 //  $('.select').selectpicker({
-  //     style: 'btn-small',
-  // });
-	</script>
+	<script src="js/block.js"></script>
+	<script src="js/bootbox.min.js"></script>
+	
 </body>
 </html>

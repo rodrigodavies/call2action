@@ -61,6 +61,7 @@
 
 			});
 
+
 			//jsPlumb.addEndpoint($('.box'),{anchor:"TopCenter"}, topEndpoint);
 			//doesnt work for blocks for whatever the reason
 
@@ -117,9 +118,10 @@
 			 $( "#canvas" ).droppable({
 			 	accept: ".box, .block",
 		    	drop: function (event, ui){
+		    		
 		    		var object = ui.draggable.attr('type');
 		    		var parentID = ui.draggable.parent().attr('id');
-		    		if(parentID=='boxes' || parentID=='blocks'){
+		    		if(parentID!=='canvas'){//} || parentID=='blocks'){
 		    			//add clone of element to canvas
 		    			var _id = 'el'+counter;
 		    			counter++;
@@ -140,6 +142,7 @@
 								$(this).attr('id', id);
 							});
 						}
+
 
 			 			//addConnectorsbyObject(_id, object);
 			 			jsPlumb.draggable(_id, {containment:'parent'});

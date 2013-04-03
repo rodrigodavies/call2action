@@ -120,7 +120,7 @@ a:hover{
 
 .box, .block {
     display:block;
-    cursor:pointer;
+    cursor:move;
     margin-top: 20px;
     position:relative;
     margin-right:auto;
@@ -138,6 +138,8 @@ a:hover{
     -webkit-box-shadow:0px 1px 1px 0px rgba(0, 0, 0, 0.2) inset;
 }
 
+
+
 label.box{
     font-size: 12px;
 }
@@ -150,8 +152,9 @@ label.box{
     -moz-border-radius-topright: 4px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    text-align: center;
+    text-align: left;
     background-color: #f5f4f4;
+    padding: 5px 0px 5px 2px;
 }
 .box {
    width:180px; 
@@ -183,13 +186,24 @@ div.menu {
 
 
 div.top {
+    position: relative;
     height: 60%;
     border-bottom:inherit;
 
 }
 
 div.bottom {
+    position:relative;
     height:40%;
+}
+
+div.play .top{
+    height:50%;
+}
+
+
+.bottom.drop{
+    text-align: center;
 }
 
 .menu .top {
@@ -205,7 +219,7 @@ div.bottom {
     margin-top: 7px;
 }
 .box.play{
-    height:80px;
+    height:100px;
 }
 .welcome{
     height:58px;
@@ -249,13 +263,14 @@ div.bottom {
 }
 .box.action{
     width:130px;
-    height: 65px;
+    height: 75px;
+    text-align: center;
 }
 .box.action .select{
     position: relative;
     margin-top: 6px;
     width:100px;
-    margin-left:15px;
+    /*margin-left:15px;*/
 }
 .block .action {
     width:100px;
@@ -364,20 +379,28 @@ div.bottom {
 }
 .header label{
     position: relative;
+    display: inline-block;
     margin-top:0px;
     line-height: 18px;
     margin-left: 5px;
     padding-top: 2px;
+    padding-right: 5px;
+}
+
+.header a{
+    position: absolute;
+    right: 5px;
+    top:5px;
 }
 div.menu-instructions {
     position: relative;
-    margin-top: -10px;
+    margin-top: 2px;
     padding-top: 0px;
 }
 input.name{
     position:relative;
-    margin-left: 6px;
-    margin-top: 5px;
+    width:60%;
+    /*margin-left: 10px;*/
 
 }
 
@@ -404,6 +427,8 @@ label, input, button, select, textarea {
     }
 select {
     height:25px;
+    background-color: white;
+    /*border:none;*/
 }
 a.toggle{
     font-size:16px;
@@ -417,6 +442,13 @@ a#subtitle, a#information {
     color:gray;
     font-weight: normal;
 }
+.drop{
+    width:150px;
+}
+
+/*label.hover:hover{
+    background-color:#e5e2e2; 
+}*/
 ._jsPlumb_overlay { z-index:51; }
 ._jsPlumb_endpoint { z-index:51; cursor:move; }
 ._jsPlumb_connector { z-index:50; }
