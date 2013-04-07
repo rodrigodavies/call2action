@@ -16,6 +16,7 @@
     $( document ).tooltip({tooltipClass:'tooltip'});
 	var counter=0;
 	var connectorStrokeColor="#918f8f";
+	var connectorLineWidth = 3;
 	//var hoverPaintStyle = { strokeStyle:"#7ec3d9" };
 	var inputs_block = 3;
 
@@ -25,7 +26,7 @@
 		outlineColor:"#b7b9bd",outlineWidth:1},
 		isSource:true,
 		isTarget:true,
-		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:2 },
+		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:connectorLineWidth },
 		maxConnections:-1
 	};
 	var topEndpoint = {
@@ -33,17 +34,17 @@
 		paintStyle:{ fillStyle:"#0066ff",radius:7,
 		outlineColor:"#b7b9bd",outlineWidth:1 },
 		maxConnections:-1,
-		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:2 },
+		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:connectorLineWidth },
 		dropOptions:{ hoverClass:"hover", activeClass:"active" },
 		isSource:true,
 		isTarget:true,
 	};
 
 	var userInputEndpoint = {
-		endpoint:"Rectangle",
-		paintStyle:{ fillStyle:"#CCFF00",width:14,height:14,
-		outlineColor:"#b7b9bd",outlineWidth:1  },
-		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:2 },
+		endpoint:"Dot",
+		paintStyle:{ fillStyle:"#CCFF00",radius:8,
+		outlineColor:"#b7b9bd",outlineWidth:10  },
+		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:connectorLineWidth },
 		isSource:true,
 		isTarget:true,
 		maxConnections:-1
@@ -57,7 +58,7 @@
 			jsPlumb.importDefaults({
 				EndpointStyles : [{ fillStyle:'#0066ff' }, { fillStyle:'#e3f00b' }],
 				Endpoints : [ [ "Dot", {radius:5} ], [ "Rectangle", { width:1,height:1 } ]],
-				Connector : [ "Bezier", {curviness:50}],
+				Connector : [ "Flowchart"],
 
 			});
 
@@ -131,8 +132,8 @@
 							.attr('id', _id)
 							.attr('type', object)
 							.css('position', 'absolute')
-							.css('margin', '0px')
-
+							.css('margin', '0px');
+						newElement.find('*').removeAttr('readonly');
 			 			$(this).append(newElement);
 			 			if(parentID=='blocks'){
 							$(newElement).children().each(function () {
@@ -148,15 +149,22 @@
 			 			jsPlumb.draggable(_id, {containment:'parent'});
 			 			if(object !='welcome'){
 			 			jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, topEndpoint);}
-			 			if (object!='play-accept'&& object !='hangup'){
+			 			if (object!='menu'&& object !='hangup'){
 							jsPlumb.addEndpoint(_id, {anchor:"BottomCenter"}, bottomEndpoint);
 						}
-						if(object=='play-accept'){
-							for (var i=1; i<4; i++){ //add three by default
-								var location = i/(4);
-								jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, userInputEndpoint);
-							};
-						}
+						if(object=='menu'){
+
+							for (var i=1; i<10; i++){ //add three by default
+								var location = i/(10);
+								var endpoint = jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, userInputEndpoint);
+
+								// console.log(endpoint.canvas);
+								// $(endpoint.canvas).css("font-weight", "bold");
+								endpoint.setLabel("<span class='endpointlabel'>"+i+"</span>");
+							}
+
+
+						} //end of play-accept
 		    		}
 		            
 	            }

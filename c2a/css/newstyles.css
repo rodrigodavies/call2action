@@ -220,6 +220,9 @@ input.url{
     width: 150px;
     /*margin-left: */
 }
+.header input{
+    margin-top: -3px;
+}
 
 .box label {
     font-size: 12px;
@@ -235,6 +238,10 @@ input.url{
     margin-top:0px;
     padding-right: 5px;
     padding-left: 5px;
+} 
+
+label{
+    pointer-events: none;
 }
 
 
@@ -327,7 +334,7 @@ select.drop{
     height:45%;
 }
 div.action{
-    width:130px;
+    /*width:130px;*/
     height: 70px;
     text-align: center;
 }
@@ -338,7 +345,7 @@ div.action{
 /**************** redirect/hangup boxes *************/
 
 .redirect .icon{
-    margin-top: -5px;
+    /*margin-top: -5px;*/
 }
 .redirect .tel {
     position:absolute;
@@ -348,8 +355,16 @@ div.action{
     font-size: 10px;
 }
 .hangup, .redirect {
-    height:35px;
+    /*height:35px;*/
 }
+
+input.redirect {
+    width:55%;
+}
+input.pad-top{
+    margin-top: 8px;
+}
+
 
 /********* blocks*************/
 
@@ -419,4 +434,17 @@ div.publish{
     height:30px;
 }
 
+/******* jsplumb stuff *****************/
+._jsPlumb_overlay { z-index:51;
+pointer-events:none;
+    font-size: 11px;
+    line-height: 11px;
+    font-weight: bold;
+ }
+._jsPlumb_endpoint {
+    z-index:51;
+    cursor:move; 
+
+}
+._jsPlumb_connector { z-index:50; }
 
