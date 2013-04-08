@@ -17,6 +17,13 @@
 	var counter=0;
 	var connectorStrokeColor="#918f8f";
 	var connectorLineWidth = 3;
+	var connectorPaintStyle = {
+				lineWidth:3,
+				strokeStyle:"#918f8f",
+				joinstyle:"round",
+				outlineColor:"white",
+				outlineWidth:5
+			};
 	//var hoverPaintStyle = { strokeStyle:"#7ec3d9" };
 	var inputs_block = 3;
 
@@ -26,7 +33,7 @@
 		outlineColor:"#b7b9bd",outlineWidth:1},
 		isSource:true,
 		isTarget:true,
-		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:connectorLineWidth },
+		connectorStyle:connectorPaintStyle,
 		maxConnections:-1
 	};
 	var topEndpoint = {
@@ -34,7 +41,7 @@
 		paintStyle:{ fillStyle:"#0066ff",radius:7,
 		outlineColor:"#b7b9bd",outlineWidth:1 },
 		maxConnections:-1,
-		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:connectorLineWidth },
+		connectorStyle:connectorPaintStyle,
 		dropOptions:{ hoverClass:"hover", activeClass:"active" },
 		isSource:true,
 		isTarget:true,
@@ -44,7 +51,7 @@
 		endpoint:"Dot",
 		paintStyle:{ fillStyle:"#CCFF00",radius:8,
 		outlineColor:"#b7b9bd",outlineWidth:10  },
-		connectorStyle:{ strokeStyle:connectorStrokeColor, lineWidth:connectorLineWidth },
+		connectorStyle:connectorPaintStyle,
 		isSource:true,
 		isTarget:true,
 		maxConnections:-1
@@ -59,7 +66,7 @@
 				EndpointStyles : [{ fillStyle:'#0066ff' }, { fillStyle:'#e3f00b' }],
 				Endpoints : [ [ "Dot", {radius:5} ], [ "Rectangle", { width:1,height:1 } ]],
 				Connector : [ "Flowchart"],
-
+				ConnectionOverlays : [[ "Arrow", { location:0.8 } ]],
 			});
 
 

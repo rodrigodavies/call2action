@@ -5,13 +5,18 @@ body{
     padding-left: 240px;
     font-family: Helvetica Neue;
     background-color:white;
+    /*min-height: 150%;*/
 }
 
 
 #center-info {
+    z-index:0;
     text-align:center;
     margin-left:auto;
     margin-right:auto;
+    background-color: white;
+    opacity:0.8;
+    filter:alpha(opacity=60);
 }
 
 .align-right {
@@ -20,9 +25,11 @@ body{
     top:10px;
 }
 
+
 /************* sidebar **************/
 
 #sidebar {
+    z-index: 21;
     position:fixed;
     left:0px;
     top:0px;
@@ -144,7 +151,8 @@ p#center-info {
     position: absolute;
     bottom: 0px;
     min-width: 80%;
-    min-height: 100%;
+    min-height: 150%;
+    height:200%;
     z-index: 10;
     /*overflow:scroll;*/
 }
@@ -379,6 +387,15 @@ input.pad-top{
     margin-top: 5px;
     margin-left: 5px;
 }
+input.input-block{
+    width: 55%;
+    margin-left: 5px;
+    margin-right: 2px;
+}
+input.input-record{
+    width:46%;
+    margin-right: 2px;
+}
 
 
 /***************** playstories block ***************/
@@ -446,7 +463,7 @@ pointer-events:none;
     cursor:move; 
 
 }
-._jsPlumb_connector { z-index:50; }
+._jsPlumb_connector { z-index:-1; }
 
 /******* audio player stuff ************/
 

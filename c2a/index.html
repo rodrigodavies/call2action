@@ -58,6 +58,11 @@
 						</div>
 					</td>
 				</tr>
+				<tr><td class="cell">
+					<div class="box welcome new" type="welcome">
+					<img class="icon" src="img/play-icon.jpg" /><label>Welcome Audio File</label><input type="text" class="input align-center url" placeholder="http://" readonly>
+				</div>
+			</td></tr>
 				<tr>
 					<td class="cell">
 						<div class="box action new" type="action">
@@ -75,7 +80,7 @@
 				</tr>
 				<tr>
 					<td class="cell">
-						<div class="box record new" type="menu">
+						<div class="box record new" type="play-record">
 							<div class="top">
 								<div class="header form-inline">
 									<label>Record</label><input type="text" class="input name input-medium" placeholder="Name of Record" readonly>
@@ -115,15 +120,15 @@
 			<table id="blocks" style="display:none">
 				<tr>
 					<td class="cell-block">
- 						<div id="derp" class="block playaudio new" type="playaudio">
+ 						<div class="block playaudio new" type="playaudio">
  							<div class="form-inline">
-							<label class="block-name">Play Audio</label><input type="text" class="input name input-medium" placeholder="Name of Record">
+							<label class="block-name">Play Audio</label><input type="text" class="input input-medium input-block" placeholder="Name of Record" readonly>
 								</div>
 							<table>
 								<tr>
 									<td class="cell-inblock">
 										<div class="box play inblock">
-											<img class="icon align-moreleft" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input align-left url" placeholder="http://">
+											<img class="icon align-moreleft" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input align-left url" placeholder="http://" readonly>
 										</div>
 									</td>
 								</tr>
@@ -139,7 +144,7 @@
 										<div class="box play-accept inblock">
 											<div class="top">
 												<img class="icon" src="img/play-icon.jpg" /><label class="align-left">Play Audio File</label>
-												<input type="text" class="input url align-left" placeholder="http://"></div>
+												<input type="text" class="input url align-left" placeholder="http://" readonly></div>
 											<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Accept User Input</label></div>
 										</div>
 									</td>
@@ -168,14 +173,17 @@
 				</tr>
 				<tr>
 					<td class="cell-block">
-						<div id="merp" class="block recordaudio new" type="recordaudio">
-							<label class="block-name">Record Audio</label>
+						<div class="block recordaudio new" type="recordaudio">
+							<div class="form-inline">
+							<label class="block-name">Record Audio</label><input type="text" class="input input-medium input-block input-record" placeholder="Name of Record" readonly>
+								</div>
+
 							<table>
 								<tr>
 									<td class="cell-inblock">
 										<div class="box play-listen inblock">
 											<div class="top"><img class="icon align-left" src="img/play-icon.jpg" /><label>Play Audio File</label>
-												<input type="text" class="input url" placeholder="http://">
+												<input type="text" class="input url" placeholder="http://" readonly>
 											</div>
 											<div class="bottom"><img class="icon align-left" src="img/headphone.jpg"/><label>Listen for User Input</label></div>
 										</div>
@@ -184,7 +192,7 @@
 								<tr>
 									<td class="cell-inblock">
 										<div class="box play inblock">
-											<img class="icon align-left" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://">
+											<img class="icon align-left" src="img/play-icon.jpg" /><label>Play Audio File</label><input type="text" class="input url" placeholder="http://" readonly>
 										</div>
 									</td>
 								</tr>
@@ -193,7 +201,7 @@
 										<div class="box play-accept inblock">
 											<div class="top">
 												<img class="icon" src="img/play-icon.jpg" /><label class="align-left">Play Audio File</label>
-												<input type="text" class="input url align-left" placeholder="http://"></div>
+												<input type="text" class="input url align-left" placeholder="http://" readonly></div>
 											<div class="bottom"><img class="icon" src="img/head-icon.jpg"/><label>Accept User Input</label></div>
 										</div>
 									</td>
