@@ -438,19 +438,30 @@ div.single-action{
     margin-left: -10px;
 }
 
+.text-align-top .icon{
+    margin-left: -20px;
+}
+
 .block table{
     border-collapse: collapse;
+}
+/*div.text-align-top{
+    line-height: 50px;
+}*/
+.text-align-top label{
+    margin-left: 5px;
 }
 
 /************* Record stories block *****************/
 .recordaudio{
     background-color: #fcdf7b;
-    height:415px;
+    height:auto;
+    padding-bottom: 5px;
 }
 
-div.publish{
+/*div.publish, div.delete{
     height:30px;
-}
+}*/
 
 /******* jsplumb stuff *****************/
 ._jsPlumb_overlay { z-index:51;
