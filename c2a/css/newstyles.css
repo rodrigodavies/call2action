@@ -285,11 +285,12 @@ label{
 
 }
 
-.icon {
+.icon, .info-icon {
     position:relative;
     display: inline;
     margin-top: 0px;
 }
+
 .header{
     border-bottom:1px solid #b7b9bd;
     -webkit-border-top-left-radius: 4px;
