@@ -70,7 +70,7 @@
 			});
 
 
-			//jsPlumb.addEndpoint($('.box'),{anchor:"TopCenter"}, topEndpoint);
+			// jsPlumb.addEndpoint($('.box'),{anchor:"TopCenter"}, topEndpoint);
 			//doesnt work for blocks for whatever the reason
 
     		//bind dbl click event on connectors
@@ -81,8 +81,13 @@
 
 		    //clear canvas onclick
 		    $('#clear').click(function() {
-		    	$('#canvas').html('');
-		    	counter=0;
+		    	bootbox.confirm("Are you sure you want to clear the canvas?", function(result){
+		    		if(result){
+		    			$('#canvas').html('');
+		    			counter=0;
+		    		}
+		    	});
+
 		    });
 
 		    $('.user-info').dblclick(function() {
