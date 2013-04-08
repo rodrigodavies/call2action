@@ -15,9 +15,12 @@
 		<div>
 			<a id="toggleBoxes" class="toggle Boxes open">Boxes</a><a id="toggleBlocks" class="toggle Blocks">Blocks</a>
 		</div>
-		<div id="container">To begin, drag elements from the toolkit onto the canvas.
+		<div id="container">
 			
 			<table id="boxes" >
+				<tr>
+					<td>To begin, drag boxes from the toolkit onto the canvas. To link two elements, drag from the yellow exit node of one box to the blue entry node of another. To delete a link, double click it. To delete a box, drag it onto the delete button at the bottom right. 
+				</tr>
 				<tr>
 					<td class="cell">
 						<div class="box menu new" type="menu">
@@ -123,6 +126,9 @@
 			
 			<table id="blocks" style="display:none">
 				<tr>
+					<td>Blocks are commonly used sequences of boxes. You can upload your own audio files, but you can't edit the flow of a block. If you need a different flow, use boxes.
+				</tr>
+				<tr>
 					<td class="cell-block">
  						<div class="block playaudio new" type="playaudio">
  							<div class="form-inline">
@@ -195,7 +201,7 @@
 											<div class="top"><img class="icon align-left" src="img/play-icon.jpg" /><label>Recording Prompt</label>
 												<input type="text" class="input url" placeholder="http://" readonly>
 											</div>
-											<div class="bottom"><img class="icon align-left" src="img/headphone.jpg"/><label>Listen for User Input</label></div>
+											<div class="bottom"><img class="icon align-left" src="img/headphone.jpg"/><label>Listen for User Voice</label></div>
 										</div>
 									</td>
 								</tr>
