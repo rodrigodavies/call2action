@@ -448,3 +448,6 @@ pointer-events:none;
 }
 ._jsPlumb_connector { z-index:50; }
 
+/******* audio player stuff ************/
+
+audio { width: 160px; }
