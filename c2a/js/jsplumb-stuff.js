@@ -79,6 +79,8 @@
 				jsPlumb.detach(conn); 
 			});
 
+			// jsPlumb.addEndpoint($(".single-action"), userInputEndpoint);
+
 		    //clear canvas onclick
 		    $('#clear').click(function() {
 		    	bootbox.confirm("Are you sure you want to clear the canvas?", function(result){
@@ -91,10 +93,16 @@
 		    });
 
 		    $('.user-info').dblclick(function() {
+		    	// bootbox.prompt("Enter the "+$(this).attr('id'), function(result){
+		    	// 	if(result){
+		    	// 		$(this).html(info);
+		    	// 	}
+		    	// });
 		    	var info = prompt("Enter the "+$(this).attr('id'));
 		    	if(info){
 		    	$(this).html(info);
-		    }});
+		    }
+		});
 
 		  //   //create xml file
 		  //   $('.save').click(function(){
