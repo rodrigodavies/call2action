@@ -1,51 +1,68 @@
 /**
- * Canvas represents the state of the screen's canvas, where users can drag and connect boxes.
+ * workspace represents the state of the screen's workspace, where users can drag and connect boxes.
  **/
-var canvas = function(){
-    this.blocks = {};
+var workspace = function(){
+    this.blocks = [];
+    this.title = null;
+}
+
+
+/**
+ *Adds a new block to the workspace
+ */
+workspace.prototype.add = function(block){
+    this.blocks.push(block);
+}
+
+/*
+ *Removes a block from the workspace
+ */
+workspace.prototype.remove = function(block){
+    //search for and remove from list
+    for(var i=0; i<this.blocks; i++){
+        if(block == this.blocks[i]){
+            this.blocks.splice(i,1);
+            break;
+        }
+    }
+
+}
+/**
+ * Returns the block if it is in the workspace. Returns null otherwise.
+ */
+workspace.prototype.getBlock = function(block){
+    for(var i=0; i<this.blocks; i++){
+        if(block == this.blocks[i]){
+            return this.blocks[i];
+        }
+    }
+    return null;
+}
+
+/**
+ *Saves the current workspace......some stuff here i suppose
+ */
+workspace.prototype.save = function(){
     
-    /**
-     *Adds a new block to the canvas
-     */
-    this.add = function(block_id){
-        
-    }
-    /*
-     *Removes a block from the canvas
-     */
-    this.remove = function(block_id){
-        
-    }
-    /**
-     * Returns the block
-     */
-    this.getBlock = function(block_id){
-        
-    }
+}
+/**
+ *Clears the workspace and removes all blocks
+ */
+workspace.prototype.clear = function() {
+    this.blocks = [];
     
-    /**
-     *Saves the current canvas
-     */
-    this.save = function(){
-        
-    }
-    /**
-     *Clears the canvas and removes all blocks
-     */
-    this.clear = function() {
-        
-    }
-    /**
-     *Dispatches a new block event to all event listeners of the given type
-     */
-    this.dispatchBlockEvent = function(type, details){
-        
-    }
     
-    /**
-     *returns the canvas to script
-     */
-    this.toScript = function(){
-        
-    }
+}
+workspace.prototype.addBlock = function(block_id, type, posX, posY){
+    var newBlock = new block(block_id, posX, posY, [], type);
+    //TODO: something about arguments/fields
+    this.add(newBlock);
+}
+
+
+/**
+ *returns the workspace to JSON
+ */
+workspace.prototype.toScript = function(){
+    
 }
