@@ -18,4 +18,5 @@ Argument.prototype.getValue = function(){
 
 Argument.prototype.setValue = function(value){
 	this.value_ = value;
+	console.log(JSON.stringify(this));
 }

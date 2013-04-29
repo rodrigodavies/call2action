@@ -24,7 +24,6 @@ workspace.prototype.getCount = function(){
  */
 workspace.prototype.add = function(block){
     this.blocks.push(block);
-    console.log(this.blocks);
 }
 
 /*
@@ -33,7 +32,6 @@ workspace.prototype.add = function(block){
 workspace.prototype.remove = function(blockId){
     //search for and remove from list
     for(var i=0; i<this.blocks.length; i++){
-        console.log(this.blocks[i].getId())
         if(blockId == this.blocks[i].getId()){
             delete this.blocks[i];
             this.blocks.splice(i,1);
@@ -87,17 +85,17 @@ workspace.prototype.save = function(){
  *Clears the workspace and removes all blocks
  */
 workspace.prototype.clear = function() {
-    this.blocks = [];
+    for(var i=0; i<this.blocks.length; i++){
+        delete this.blocks[i];
+    }
+    this.blocks = new Array();
     
     
 }
 workspace.prototype.addBlock = function(block_id, type, posX, posY){
-    // var newBlock = new block(block_id, posX, posY, [], type);
-    //TODO: something about arguments/fields
     var details = {blockId: block_id, "type": type, "posX":posX, "posY":posY};
     var blockEvent = new BlockEvent("new", details);
     this.handleBlockEvent(blockEvent);
-    //this.add(newBlock);
 }
 
 /**
@@ -105,13 +103,6 @@ workspace.prototype.addBlock = function(block_id, type, posX, posY){
  */
 workspace.prototype.handleBlockEvent = function(blockEvent){
     var type = blockEvent.type;
-    console.log(this.allHandlers);
-    // var details = blockEvent.details;
-    // switch(type){
-    //     case "connection":
-    //         var block1 = details.block1; block2 = details.block2;
-            
-    // }
     if (this.allHandlers[type]){
         for (var i in this.allHandlers[type]){
             this.allHandlers[type][i](blockEvent);
@@ -125,10 +116,9 @@ workspace.prototype.handleBlockEvent = function(blockEvent){
  * the parameter 'handler' has to be a function with one parameter which is an event object
  */
 workspace.prototype.addEventListener = function(eventType, handler){
-    console.log("got here");
+    // console.log("got here");
     if (!this.allHandlers[eventType])
         this.allHandlers[eventType] = [];
-    console.log("got here");
     this.allHandlers[eventType].push(handler);
 }
 

@@ -50,6 +50,13 @@ Block.prototype.updatePosition = function(x,y){
 	console.log(JSON.stringify(this));
 }
 
+Block.prototype.updateArgument = function(name, value){
+	for (var i = 0; i<this.args.length; i++){
+		if(this.args[i].name_ == name){
+			this.args[i].setValue(value);
+		}
+	}
+}
 
 // Block.prototype.setField = function(field, input){
 // 	if(field in this.fields ){

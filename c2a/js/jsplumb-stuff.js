@@ -130,21 +130,20 @@ window.jsPlumbinstance = {
 				case "menu":
 				case "play":
 				case "play-record":
-					var nameArg = new Argument("name", "string");
-					var promptArg = new Argument("prompt", "string");
-					args.push(nameArg, promptArg);
-					break;
 				case "welcome":
-					var nameArg = new Argument("name", "string");
-					args.push(nameArg);
+					var promptArg = new Argument("prompt", "string");
+					args.push(promptArg);
 					break;
 				case "redirect":
 					var phoneArg = new Argument("number", "number");
 					args.push(phoneArg);
 					break;
+				case "action":
+					var actionArg = new Argument("action", "action");
+					args.push(actionArg);
+					break;
 			}
 			var block = new Block(e.details.blockId, e.details.posX, e.details.posY, args, type);
-			console.log(block);
 			canvas.add(block);
 		});
 		 

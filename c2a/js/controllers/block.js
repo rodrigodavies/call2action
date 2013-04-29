@@ -17,8 +17,9 @@ var blockListener = function(block){
 	});
 
 	this.view.find('.url').on('blur', function(e){
-		block.setField('url', $(this).val());
+		block.updateArgument('prompt', $(this).val());
 	});
+
 
 	
 
