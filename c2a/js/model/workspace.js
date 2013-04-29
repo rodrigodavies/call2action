@@ -1,12 +1,13 @@
 /**
  * workspace represents the state of the canvas, where users can drag and connect boxes.
  **/
-workspace = function(id){
+var workspace = function(id){
     this.id = id;
-    this.blocks = [];
+    this.blocks = new Array();
     this.title = null;
-
     workspaceListener = new workspaceListener(this);
+    this.allHandlers = new Array();
+
 }
 
 workspace.prototype.getId = function(){
@@ -18,14 +19,12 @@ workspace.prototype.getCount = function(){
 }
 
 
-
-
-
 /**
  *Adds a new block to the workspace
  */
 workspace.prototype.add = function(block){
     this.blocks.push(block);
+    console.log(this.blocks);
 }
 
 /*
@@ -33,8 +32,10 @@ workspace.prototype.add = function(block){
  */
 workspace.prototype.remove = function(blockId){
     //search for and remove from list
-    for(var i=0; i<this.blocks; i++){
-        if(block == this.blocks[i].getId()){
+    for(var i=0; i<this.blocks.length; i++){
+        console.log(this.blocks[i].getId())
+        if(blockId == this.blocks[i].getId()){
+            delete this.blocks[i];
             this.blocks.splice(i,1);
             break;
         }
@@ -45,7 +46,7 @@ workspace.prototype.remove = function(blockId){
  * Returns the block if it is in the workspace. Returns null otherwise.
  */
 workspace.prototype.getBlock = function(blockId){
-    for(var i=0; i<this.blocks; i++){
+    for(var i=0; i<this.blocks.length; i++){
         if(block == this.blocks[i].getId()){
             return this.blocks[i];
         }
@@ -91,19 +92,44 @@ workspace.prototype.clear = function() {
     
 }
 workspace.prototype.addBlock = function(block_id, type, posX, posY){
-    var newBlock = new block(block_id, posX, posY, [], type);
+    // var newBlock = new block(block_id, posX, posY, [], type);
     //TODO: something about arguments/fields
-    this.add(newBlock);
+    var details = {blockId: block_id, "type": type, "posX":posX, "posY":posY};
+    var blockEvent = new BlockEvent("new", details);
+    this.handleBlockEvent(blockEvent);
+    //this.add(newBlock);
 }
 
+/**
+ * Dispatch a new event to all the event listeners of a given event type
+ */
 workspace.prototype.handleBlockEvent = function(blockEvent){
     var type = blockEvent.type;
-    var details = blockEvent.details;
-    switch(type){
-        case "connection":
-            var block1 = details.block1; block2 = details.block2;
+    console.log(this.allHandlers);
+    // var details = blockEvent.details;
+    // switch(type){
+    //     case "connection":
+    //         var block1 = details.block1; block2 = details.block2;
             
+    // }
+    if (this.allHandlers[type]){
+        for (var i in this.allHandlers[type]){
+            this.allHandlers[type][i](blockEvent);
+        }
     }
+}
+
+
+/**
+ * Add a new event listener for a given event type
+ * the parameter 'handler' has to be a function with one parameter which is an event object
+ */
+workspace.prototype.addEventListener = function(eventType, handler){
+    console.log("got here");
+    if (!this.allHandlers[eventType])
+        this.allHandlers[eventType] = [];
+    console.log("got here");
+    this.allHandlers[eventType].push(handler);
 }
 
 

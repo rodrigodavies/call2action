@@ -10,7 +10,7 @@ var workspaceListener = function(canvas){
 	   sourceEndpoint = info.sourceEndpoint;
 	   targetEndpoint = info.targetEndpoint;
 	   var details = {block1: sourceBlock, block2: targetBlock,
-	   	endpoint1: sourceEndpoint, endpoint2: targetEndpoint};
+	   endpoint1: sourceEndpoint, endpoint2: targetEndpoint};
 	   var blockEvent = new BlockEvent("connection", details);
 	   canvas.handleBlockEvent(blockEvent);
 	});
@@ -23,7 +23,7 @@ var workspaceListener = function(canvas){
 			var parentID = ui.draggable.parent().attr('id');
 			if(parentID!=='canvas'){
 				//add clone of element to canvas
-				var _id = 'el'+canvas.getCount();
+				var _id = createUniqueId();
 				var position = $(ui.helper).position();
 				var newElement = $(ui.helper).clone()
 					.addClass('added')
@@ -50,6 +50,15 @@ var workspaceListener = function(canvas){
 	});
 
 
+}
+
+/**
+ * Creates unique id for each element on the canvas
+ * */
+function createUniqueId(){
+	var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+	var uniqid = randLetter + Date.now();
+	return uniqid;
 }
 
 function addConnectorsbyObject(_id, object){

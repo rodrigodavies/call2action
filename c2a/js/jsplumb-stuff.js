@@ -15,18 +15,11 @@ $('#toggleBlocks').click(function() {
 	});
 
 
-$('.user-info').dblclick(function() {
-	var info = prompt("Enter the "+$(this).attr('id'));
-	if(info){
-	$(this).html(info);
-	}
-});
 $(document).bind('drop', function(){
 	$(document.activeElement).trigger('blur');
 });
 
 $(document).tooltip({tooltipClass:'tooltip'});
-var counter=0;
 var connectorStrokeColor="#918f8f";
 var connectorLineWidth = 3;
 var connectorPaintStyle = {
@@ -89,6 +82,14 @@ window.jsPlumbinstance = {
 		var canvas = new workspace('canvas');
 
 
+		$('.user-info').dblclick(function() {
+			var info = prompt("Enter the "+$(this).attr('id'));
+			if(info){
+			$(this).html(info);
+			}
+		});
+
+
 		$('#save').click(function(){
 			canvas.save();
 		});
@@ -97,7 +98,6 @@ window.jsPlumbinstance = {
 			bootbox.confirm("Are you sure you want to clear the canvas?", function(result){
 				if(result){
 					$('#canvas').html('');
-					counter=0;
 					canvas.clear();
 				}
 			});
@@ -110,70 +110,43 @@ window.jsPlumbinstance = {
 	    	revert:"invalid",	
 	    }); 
 
-		//make canvas droppable, add endpoints
-		// $( "#canvas" ).droppable({
-		//  	accept: ".box, .block",
-	 //    	drop: function (event, ui){
-	 //    		var object = ui.draggable.attr('type');
-	 //    		var parentID = ui.draggable.parent().attr('id');
-	 //    		if(parentID!=='canvas'){
-	 //    			//add clone of element to canvas
-	 //    			var _id = 'el'+counter;
-	 //    			var position = $(ui.helper).position();
-	 //    			counter++;
-	 //    			var newElement = $(ui.helper).clone()
-		// 				.addClass('added')
-		// 				.removeClass('new ui-draggable-dragging')
-		// 				.attr({'id': _id,'type': object })
-		// 				.css({'position': 'absolute','margin': '0px'});
-		// 			newElement.find('*').removeAttr('readonly');
-		//  			$(this).append(newElement);
-
-		//  			if(parentID=='blocks'){
-		// 				$(newElement).children().each(function () {
-		// 					var parent = $(this).parent().attr('id');
-		// 					var id = $(this).attr('id');
-		// 					id = parent + id;
-		// 					$(this).attr('id', id);
-		// 				});
-		// 			}
-		//  			addConnectorsbyObject(_id, object);
-		//  			jsPlumb.draggable(_id, {containment:'parent'});
-
-		//  			canvas.addBlock(_id, object, position.left, position.top);
-
-	 //    		}
-	            
-  //           }
-	 //    });
-
-
 		 //make delete box droppable, delete objects and respective connections
 		$( "#delete-container" ).droppable({
 		 		accept:".added",
   				hoverClass: "ui-state-hover",
   				tolerance: "touch",
 		 		drop: function (event, ui){
-		 			jsPlumb.removeAllEndpoints($(ui.draggable).attr('id'));
+		 			var id = $(ui.draggable).attr('id');
+		 			jsPlumb.removeAllEndpoints(id);
+		 			canvas.remove(id);
 		 			$(ui.draggable).remove();
 		 		}
 		 	});
 
-		function addConnectorsbyObject (_id, object){
-			if(object !='welcome'){
-	 			jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, topEndpoint);}
-	 			if (object!='menu'&& object !='hangup'){
-					jsPlumb.addEndpoint(_id, {anchor:"BottomCenter"}, bottomEndpoint);
-				}
-				if(object=='menu'){
-					for (var i=1; i<10; i++){
-						var location = i/(10);
-						var endpoint = jsPlumb.addEndpoint(_id, {anchor: [location, 1, 0, 1]}, userInputEndpoint);
-						endpoint.setLabel("<span class='endpointlabel'>"+i+"</span>");
-					}
-				} 
+		canvas.addEventListener('new', function(e){
+			var type = e.details.type;
+			var args = new Array();
+			switch(type){ //add arguments to block
+				case "menu":
+				case "play":
+				case "play-record":
+					var nameArg = new Argument("name", "string");
+					var promptArg = new Argument("prompt", "string");
+					args.push(nameArg, promptArg);
+					break;
+				case "welcome":
+					var nameArg = new Argument("name", "string");
+					args.push(nameArg);
+					break;
+				case "redirect":
+					var phoneArg = new Argument("number", "number");
+					args.push(phoneArg);
+					break;
 			}
-
+			var block = new Block(e.details.blockId, e.details.posX, e.details.posY, args, type);
+			console.log(block);
+			canvas.add(block);
+		});
 		 
 }    
 }
