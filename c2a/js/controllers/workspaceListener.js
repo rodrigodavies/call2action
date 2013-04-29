@@ -1,12 +1,16 @@
 var workspaceListener = function(canvas){
 	this.view = $('#'+canvas.getId());
 	this.canvas = canvas;
+	console.log(this.canvas);
 
 
 	jsPlumb.bind("jsPlumbConnection", function(info) {
 	   sourceBlock = info.sourceId;
 	   targetBlock = info.targetId;
-	   var details = {sourceId: sourceBlock, targetId = targetBlock}
+	   sourceEndpoint = info.sourceEndpoint;
+	   targetEndpoint = info.targetEndpoint;
+	   var details = {block1: sourceBlock, block2: targetBlock,
+	   	endpoint1: sourceEndpoint, endpoint2: targetEndpoint};
 	   var blockEvent = new BlockEvent("connection", details);
 	   canvas.handleBlockEvent(blockEvent);
 	});
@@ -19,7 +23,7 @@ var workspaceListener = function(canvas){
 			var parentID = ui.draggable.parent().attr('id');
 			if(parentID!=='canvas'){
 				//add clone of element to canvas
-				var _id = 'el'+this.canvas.getCount());
+				var _id = 'el'+canvas.getCount();
 				var position = $(ui.helper).position();
 				var newElement = $(ui.helper).clone()
 					.addClass('added')
@@ -43,11 +47,12 @@ var workspaceListener = function(canvas){
 			}
 		    
 		}
+	});
 
 
 }
 
-function addConnectorsbyObject (_id, object){
+function addConnectorsbyObject(_id, object){
 			if(object !='welcome'){
 	 			jsPlumb.addEndpoint(_id, {anchor:"TopCenter"}, topEndpoint);}
 	 			if (object!='menu'&& object !='hangup'){

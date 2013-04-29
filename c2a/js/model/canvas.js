@@ -1,7 +1,7 @@
 /**
  * workspace represents the state of the canvas, where users can drag and connect boxes.
  **/
-var workspace = function(id){
+workspace = function(id){
     this.id = id;
     this.blocks = [];
     this.title = null;
@@ -101,7 +101,8 @@ workspace.prototype.handleBlockEvent = function(blockEvent){
     var details = blockEvent.details;
     switch(type){
         case "connection":
-            sourceBlock = 
+            var block1 = details.block1; block2 = details.block2;
+            
     }
 }
 

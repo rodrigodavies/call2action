@@ -86,7 +86,7 @@ window.jsPlumbinstance = {
 		});
 
 
-		var canvas = new workspace();
+		var canvas = new workspace('canvas');
 
 
 		$('#save').click(function(){
@@ -111,41 +111,41 @@ window.jsPlumbinstance = {
 	    }); 
 
 		//make canvas droppable, add endpoints
-		$( "#canvas" ).droppable({
-		 	accept: ".box, .block",
-	    	drop: function (event, ui){
-	    		var object = ui.draggable.attr('type');
-	    		var parentID = ui.draggable.parent().attr('id');
-	    		if(parentID!=='canvas'){
-	    			//add clone of element to canvas
-	    			var _id = 'el'+counter;
-	    			var position = $(ui.helper).position();
-	    			counter++;
-	    			var newElement = $(ui.helper).clone()
-						.addClass('added')
-						.removeClass('new ui-draggable-dragging')
-						.attr({'id': _id,'type': object })
-						.css({'position': 'absolute','margin': '0px'});
-					newElement.find('*').removeAttr('readonly');
-		 			$(this).append(newElement);
+		// $( "#canvas" ).droppable({
+		//  	accept: ".box, .block",
+	 //    	drop: function (event, ui){
+	 //    		var object = ui.draggable.attr('type');
+	 //    		var parentID = ui.draggable.parent().attr('id');
+	 //    		if(parentID!=='canvas'){
+	 //    			//add clone of element to canvas
+	 //    			var _id = 'el'+counter;
+	 //    			var position = $(ui.helper).position();
+	 //    			counter++;
+	 //    			var newElement = $(ui.helper).clone()
+		// 				.addClass('added')
+		// 				.removeClass('new ui-draggable-dragging')
+		// 				.attr({'id': _id,'type': object })
+		// 				.css({'position': 'absolute','margin': '0px'});
+		// 			newElement.find('*').removeAttr('readonly');
+		//  			$(this).append(newElement);
 
-		 			if(parentID=='blocks'){
-						$(newElement).children().each(function () {
-							var parent = $(this).parent().attr('id');
-							var id = $(this).attr('id');
-							id = parent + id;
-							$(this).attr('id', id);
-						});
-					}
-		 			addConnectorsbyObject(_id, object);
-		 			jsPlumb.draggable(_id, {containment:'parent'});
+		//  			if(parentID=='blocks'){
+		// 				$(newElement).children().each(function () {
+		// 					var parent = $(this).parent().attr('id');
+		// 					var id = $(this).attr('id');
+		// 					id = parent + id;
+		// 					$(this).attr('id', id);
+		// 				});
+		// 			}
+		//  			addConnectorsbyObject(_id, object);
+		//  			jsPlumb.draggable(_id, {containment:'parent'});
 
-		 			canvas.addBlock(_id, object, position.left, position.top);
+		//  			canvas.addBlock(_id, object, position.left, position.top);
 
-	    		}
+	 //    		}
 	            
-            }
-	    });
+  //           }
+	 //    });
 
 
 		 //make delete box droppable, delete objects and respective connections
