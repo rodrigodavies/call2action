@@ -13,15 +13,7 @@ $('#toggleBlocks').click(function() {
 	$('#boxes').fadeOut('fast');
 	$('#blocks').fadeIn('fast');
 	});
-//clear canvas onclick
-$('#clear').click(function() {
-	bootbox.confirm("Are you sure you want to clear the canvas?", function(result){
-		if(result){
-			$('#canvas').html('');
-			counter=0;
-		}
-	});
-});
+
 
 $('.user-info').dblclick(function() {
 	var info = prompt("Enter the "+$(this).attr('id'));
@@ -29,20 +21,21 @@ $('.user-info').dblclick(function() {
 	$(this).html(info);
 	}
 });
+$(document).bind('drop', function(){
+	$(document.activeElement).trigger('blur');
+});
 
 $(document).tooltip({tooltipClass:'tooltip'});
 var counter=0;
 var connectorStrokeColor="#918f8f";
 var connectorLineWidth = 3;
 var connectorPaintStyle = {
-			lineWidth:3,
-			strokeStyle:"#918f8f",
-			joinstyle:"round",
-			outlineColor:"white",
-			outlineWidth:5
-		};
-//var hoverPaintStyle = { strokeStyle:"#7ec3d9" };
-var inputs_block = 3;
+	lineWidth:3,
+	strokeStyle:"#918f8f",
+	joinstyle:"round",
+	outlineColor:"white",
+	outlineWidth:5
+};
 
 var bottomEndpoint = {
 	endpoint:"Dot",
@@ -53,6 +46,7 @@ var bottomEndpoint = {
 	connectorStyle:connectorPaintStyle,
 	maxConnections:-1
 };
+
 var topEndpoint = {
 	endpoint:"Dot",					
 	paintStyle:{ fillStyle:"#0066ff",radius:7,
@@ -85,42 +79,29 @@ window.jsPlumbinstance = {
 			Connector : [ "Flowchart"],
 			ConnectionOverlays : [[ "Arrow", { location:0.8 } ]],
 		});
-
-
 		//bind dbl click event on connectors
 		jsPlumb.bind("dblclick", function(conn, originalEvent) {
 			if (confirm("Delete connection from " + conn.sourceId + " to " + conn.targetId + "?"))
 			jsPlumb.detach(conn); 
 		});
+
+
 		var canvas = new workspace();
 
 
-
-
-
-	  //   //create xml file
-	  //   $('.save').click(function(){
-	  //   	var elements = $('.added');
-	  //   	var file = '<?xml version="1.0"?>\n<flowchart>\n';
-			// for(var i = 0; i<elements.length; i++){
-			// 	var block = $(elements[i]);
-			// 	var id=block.attr('id');
-			// 	var shape = block.attr('box');
-			// 	var left = block.css('left');
-			// 	var top = block.css('top');
-			// 	var text = block.text();
-			// 	var newStuff = ' <block id="'+id+'" box="'+shape+'">\n  <text>'
-			// 		+text+'</text>\n  <position top="'+top+'" '
-			// 		+'left="'+left+'">\n </block>\n';
-			// 	file = file.concat(newStuff);
-			// 	//console.log(file);
-			// }
-			// file = file.concat('</flowchart>');
-			// $('#dialog').text(file);
-			// $( '#dialog' ).dialog({modal:true, height: 'auto', minWidth: 400});
-	  //   });
-
-	
+		$('#save').click(function(){
+			canvas.save();
+		});
+		//clear canvas onclick
+		$('#clear').click(function() {
+			bootbox.confirm("Are you sure you want to clear the canvas?", function(result){
+				if(result){
+					$('#canvas').html('');
+					counter=0;
+					canvas.clear();
+				}
+			});
+		});
 		//make objects droppable
 	    $(".new" ).draggable({
 	 		addClasses: false,
@@ -129,15 +110,13 @@ window.jsPlumbinstance = {
 	    	revert:"invalid",	
 	    }); 
 
-
-
 		//make canvas droppable, add endpoints
-		 $( "#canvas" ).droppable({
+		$( "#canvas" ).droppable({
 		 	accept: ".box, .block",
 	    	drop: function (event, ui){
 	    		var object = ui.draggable.attr('type');
 	    		var parentID = ui.draggable.parent().attr('id');
-	    		if(parentID!=='canvas'){//} || parentID=='blocks'){
+	    		if(parentID!=='canvas'){
 	    			//add clone of element to canvas
 	    			var _id = 'el'+counter;
 	    			var position = $(ui.helper).position();
@@ -160,6 +139,7 @@ window.jsPlumbinstance = {
 					}
 		 			addConnectorsbyObject(_id, object);
 		 			jsPlumb.draggable(_id, {containment:'parent'});
+
 		 			canvas.addBlock(_id, object, position.left, position.top);
 
 	    		}
@@ -199,10 +179,8 @@ window.jsPlumbinstance = {
 }
   
 jsPlumb.bind("ready", function() {
-        // chrome fix.
-        document.onselectstart = function () { return false; };
-
-        jsPlumbinstance.init();
-        
-    });
+	// chrome fix.
+	document.onselectstart = function () { return false; };
+	jsPlumbinstance.init();
+});
     

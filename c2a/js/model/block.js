@@ -17,13 +17,26 @@ var block = function(id, posX, posY, _fields, type){
 		this.fields[_fields[i]] = null;
 	}
 	console.log(JSON.stringify(this));
+	blocklistener = new blockListener(this);
 
 	//register view listener
 
 }
+block.prototype.getId = function(){
+	return this.id;
+}
+
+block.prototype.updateName = function(text){
+	this.name = text;
+}
 
 block.prototype.setBeforeBlock = function(block){
 	this.beforeBlock = block;
+	console.log(JSON.stringify(this));
+}
+
+block.prototype.setAfterBlock = function(block){
+	this.afterBlock = block;
 	console.log(JSON.stringify(this));
 }
 
@@ -58,6 +71,18 @@ $.extend(menu.prototype, {
         console.log(JSON.stringify(this));
     }
 });
+
+var blockCollection = function(id, posX, posY, blocks, type){
+	this.id = id;
+	this.name = null;
+	this.type = type;
+	this.position = {x: posX, y:posY};
+	this.blocks = blocks;
+
+}
+
+
+
 
 // var test = new menu(10, 10, ["inputfield"]);
 // var child = new block(10, 15, ["inputfield"], 'audio');
